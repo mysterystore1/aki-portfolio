@@ -5,6 +5,7 @@ import { pickLocalizedText } from '@/lib/i18n';
 import TagChip from '@/components/TagChip';
 import AutoTranslatedBadge from '@/components/AutoTranslatedBadge';
 import ImageWithFallback from '@/components/ImageWithFallback';
+import ProofLinks from '@/components/ProofLinks';
 
 export default function WorkCard({
   work,
@@ -53,6 +54,7 @@ export default function WorkCard({
           alt={title.text}
           fallbackLabel="Aki"
           imageClassName="transition duration-500 group-hover:scale-105"
+          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
         <div
           className={`absolute bottom-3 left-3 h-2 w-12 rounded-full ${motifClass}`}
@@ -72,16 +74,7 @@ export default function WorkCard({
         <h3 className="text-lg font-semibold text-ink-900">{title.text}</h3>
         <p className="text-sm text-slate-600">{summary.text}</p>
         {showProof && work.proof_links?.length ? (
-          <div className="flex flex-wrap gap-2 text-xs text-slate-500">
-            {work.proof_links.slice(0, 3).map((link) => (
-              <span
-                key={link.label}
-                className="rounded-full border border-slate-200 bg-white px-2 py-1"
-              >
-                {link.label}
-              </span>
-            ))}
-          </div>
+          <ProofLinks links={work.proof_links.slice(0, 3)} />
         ) : null}
         <div className="mt-auto flex flex-wrap gap-2 pt-2">
           {work.role_tags?.map((tag) => (

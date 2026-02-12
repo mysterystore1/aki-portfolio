@@ -26,14 +26,16 @@ export default function GalleryGrid({
         });
         const tag = item.tag || 'Field';
         const number = `#${String(index + 1).padStart(2, '0')}`;
+        const alt = caption.text.trim().length > 0 ? caption.text : `Gallery ${number}`;
         const content = (
           <div className="group relative aspect-square overflow-hidden rounded-2xl border border-slate-200 bg-slate-100">
             <ImageWithFallback
               src={item.image?.url}
-              alt={caption.text}
+              alt={alt}
               fallbackLabel={number}
               fallbackSubLabel={tag}
               imageClassName="transition duration-500 group-hover:scale-105"
+              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
             />
             <span className="absolute left-2 top-2 rounded-full bg-white/90 px-2 py-1 text-[10px] font-semibold text-ink-900">
               {number}

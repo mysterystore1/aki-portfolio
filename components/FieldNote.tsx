@@ -4,9 +4,9 @@ type FieldNoteVariant = 'default' | 'warning' | 'tip' | 'proof';
 
 const variantStyles: Record<FieldNoteVariant, string> = {
   default: 'border-amber-200 bg-amber-50 text-amber-900',
-  warning: 'border-rose-200 bg-rose-50 text-rose-900',
-  tip: 'border-emerald-200 bg-emerald-50 text-emerald-900',
-  proof: 'border-indigo-200 bg-indigo-50 text-indigo-900'
+  warning: 'border-sky-200 bg-sky-50 text-sky-900',
+  tip: 'border-amber-200 bg-amber-50 text-amber-900',
+  proof: 'border-sky-200 bg-sky-50 text-sky-900'
 };
 
 export default function FieldNote({
@@ -28,7 +28,8 @@ export default function FieldNote({
     <div
       className={cn(
         'relative rounded-2xl border px-4 py-3 shadow-sm',
-        'before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:rounded-l-2xl before:bg-ink-900/80',
+        'before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:rounded-l-2xl',
+        'before:bg-gradient-to-b before:from-ink-900 before:to-accent-600',
         'motion-safe:rotate-[-1deg] motion-safe:transition motion-safe:hover:rotate-0',
         variantStyles[variant],
         className

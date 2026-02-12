@@ -40,10 +40,6 @@ export default async function MediaKitPage({
   if (!isLocale(locale)) notFound();
   const resolvedLocale = locale as Locale;
   const settings = await getSettings();
-  const dmTemplate =
-    resolvedLocale === 'jp'
-      ? settings.dm_template_ja || copyPack.global.dmTemplate.ja
-      : settings.dm_template_en || copyPack.global.dmTemplate.en;
   const includes =
     resolvedLocale === 'jp'
       ? copyPack.mediaKit.includes.ja
@@ -137,9 +133,6 @@ export default async function MediaKitPage({
                 }
               />
             </div>
-            <div className="mt-6 rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700">
-              {dmTemplate}
-            </div>
           </div>
 
           <div className="rounded-3xl border border-slate-100 bg-slate-50 p-6 shadow-sm">
@@ -149,6 +142,7 @@ export default async function MediaKitPage({
                 alt="Media kit preview"
                 fallbackLabel="Media kit"
                 imageClassName="object-cover"
+                sizes="(max-width: 1024px) 100vw, 360px"
               />
             </div>
             <div className="mt-4 text-xs text-slate-500">

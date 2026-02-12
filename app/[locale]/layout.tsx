@@ -48,7 +48,7 @@ export default async function LocaleLayout({
   return (
     <div className="min-h-screen bg-white">
       <SiteHeader locale={resolvedLocale} settings={settings} />
-      <main className="pb-24">{children}</main>
+      <main className="pb-28 sm:pb-32">{children}</main>
       <ContactPanel locale={resolvedLocale} settings={settings} />
       <SiteFooter settings={settings} locale={resolvedLocale} />
       <FixedCTA settings={settings} locale={resolvedLocale} />

@@ -83,6 +83,21 @@ export default async function Home({
   const highlights =
     resolvedLocale === 'jp' ? settings.highlights_ja : settings.highlights_en;
   const galleryItems = settings.gallery_items || [];
+  const localGalleryImages = Array.from({ length: 12 }, (_, index) => ({
+    url: `/images/gallery/${String(index + 1).padStart(2, '0')}.png`,
+    width: 1000,
+    height: 1000
+  }));
+  const fallbackGalleryItems = copyPack.gallery.items.map((item, index) => ({
+    ...item,
+    image: localGalleryImages[index]
+  }));
+  const cmsGalleryItems = galleryItems.map((item, index) => ({
+    ...item,
+    image: item.image ?? localGalleryImages[index % localGalleryImages.length]
+  }));
+  const useCmsGallery = settings.gallery_enabled && galleryItems.length > 0;
+  const resolvedGalleryItems = useCmsGallery ? cmsGalleryItems : fallbackGalleryItems;
   const galleryTitle = pickLocalizedText({
     locale: resolvedLocale,
     ja: settings.gallery_title_ja || copyPack.gallery.title.ja,
@@ -95,7 +110,7 @@ export default async function Home({
   });
   const galleryAuto =
     resolvedLocale === 'en' &&
-    galleryItems.some((item) =>
+    resolvedGalleryItems.some((item) =>
       pickLocalizedText({
         locale: resolvedLocale,
         ja: item.caption_ja,
@@ -208,6 +223,8 @@ export default async function Home({
                 alt={copyPack.home.hero.rightCard.name}
                 fallbackLabel={copyPack.home.hero.rightCard.name}
                 imageClassName="object-[center_top]"
+                priority
+                sizes="(max-width: 1024px) 90vw, 420px"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-ink-900/70 via-ink-900/10 to-transparent" />
               <div className="absolute bottom-5 left-5 text-white">
@@ -351,7 +368,7 @@ export default async function Home({
         </Container>
       </section>
 
-      {settings.gallery_enabled && galleryItems.length ? (
+      {resolvedGalleryItems.length ? (
         <section className="bg-white">
           <Container className="py-14 sm:py-20">
             <div className="flex flex-wrap items-center justify-between gap-4">
@@ -370,7 +387,7 @@ export default async function Home({
             <div className="mt-4">
               <FieldNote variant="proof" body={galleryNote.text} />
             </div>
-            <GalleryGrid items={galleryItems} locale={resolvedLocale} />
+            <GalleryGrid items={resolvedGalleryItems} locale={resolvedLocale} />
           </Container>
         </section>
       ) : null}
@@ -411,6 +428,7 @@ export default async function Home({
                     alt={`YouTube video ${index + 1}`}
                     fallbackLabel="YouTube"
                     imageClassName="object-cover transition duration-300 motion-safe:group-hover:scale-[1.03]"
+                    sizes="(max-width: 1024px) 100vw, 33vw"
                   />
                 </div>
                 <div className="mt-3 flex items-center justify-between text-xs text-slate-500">

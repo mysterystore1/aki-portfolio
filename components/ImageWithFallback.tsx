@@ -11,7 +11,10 @@ export default function ImageWithFallback({
   fallbackLabel,
   fallbackSubLabel,
   className,
-  imageClassName
+  imageClassName,
+  sizes = '(max-width: 768px) 100vw, 50vw',
+  priority = false,
+  loading
 }: {
   src?: string;
   alt: string;
@@ -19,6 +22,9 @@ export default function ImageWithFallback({
   fallbackSubLabel?: string;
   className?: string;
   imageClassName?: string;
+  sizes?: string;
+  priority?: boolean;
+  loading?: 'lazy' | 'eager';
 }) {
   const [hasError, setHasError] = useState(false);
 
@@ -37,6 +43,9 @@ export default function ImageWithFallback({
       src={src}
       alt={alt}
       fill
+      sizes={sizes}
+      priority={priority}
+      loading={priority ? undefined : loading}
       className={cn('object-cover', imageClassName)}
       onError={() => setHasError(true)}
     />

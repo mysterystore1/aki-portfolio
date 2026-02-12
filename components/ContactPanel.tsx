@@ -1,6 +1,7 @@
 import type { Settings } from '@/lib/microcms';
 import type { Locale } from '@/lib/i18n';
 import { copyPack } from '@/lib/copy-pack';
+import DmTemplateBox from '@/components/DmTemplateBox';
 
 export default function ContactPanel({
   locale,
@@ -41,9 +42,7 @@ export default function ContactPanel({
           </p>
         </div>
 
-        <div className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700">
-          {template}
-        </div>
+        <DmTemplateBox template={template} locale={locale} context="contact_panel" />
 
         <div className="flex flex-wrap gap-3">
           <a

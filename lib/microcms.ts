@@ -141,6 +141,105 @@ const fallbackString = (value: string | undefined, fallback?: string) =>
 const fallbackArray = <T>(value: T[] | undefined, fallback: T[]) =>
   Array.isArray(value) && value.length > 0 ? value : fallback;
 
+const buildLocalWorkCover = (slug?: string): MicroCMSImage | undefined =>
+  slug
+    ? {
+        url: `/images/works/${slug}.png`,
+        width: 1600,
+        height: 900
+      }
+    : undefined;
+
+const normalizeWork = (work: Partial<Work>): Work => {
+  const mock = mockWorks.find((item) => item.slug === work.slug);
+  const slug = fallbackString(work.slug, mock?.slug ?? '');
+  const titleJa = fallbackString(work.title_ja, mock?.title_ja ?? slug);
+  const summaryJa = fallbackString(work.summary_ja, mock?.summary_ja ?? '');
+  const coverImage = work.cover_image ?? mock?.cover_image ?? buildLocalWorkCover(slug);
+
+  return {
+    id: work.id ?? mock?.id ?? slug,
+    slug,
+    title_ja: titleJa,
+    title_en: fallbackString(
+      work.title_en || '',
+      mock?.title_en || mock?.title_ja || titleJa
+    ),
+    summary_ja: summaryJa,
+    summary_en: fallbackString(
+      work.summary_en || '',
+      mock?.summary_en || mock?.summary_ja || summaryJa
+    ),
+    role_tags: fallbackArray(work.role_tags, mock?.role_tags ?? []),
+    metrics: fallbackArray(work.metrics, mock?.metrics ?? []),
+    proof_links: fallbackArray(work.proof_links, mock?.proof_links ?? []),
+    cover_image: coverImage,
+    gallery_images: fallbackArray(work.gallery_images, mock?.gallery_images ?? []),
+    date_range: fallbackString(work.date_range, mock?.date_range ?? ''),
+    en_reviewed: work.en_reviewed ?? mock?.en_reviewed,
+    detail_sections_ja: fallbackArray(
+      work.detail_sections_ja,
+      mock?.detail_sections_ja ?? []
+    ),
+    detail_sections_en: fallbackArray(
+      work.detail_sections_en,
+      mock?.detail_sections_en ?? []
+    )
+  };
+};
+
+const normalizeService = (service: Partial<Service>): Service => {
+  const mock = mockServices.find((item) => item.type === service.type);
+  const type = (service.type ?? mock?.type ?? 'mc') as ServiceType;
+
+  return {
+    id: service.id ?? mock?.id ?? type,
+    type,
+    body_ja: fallbackString(service.body_ja, mock?.body_ja ?? ''),
+    body_en: fallbackString(
+      service.body_en || '',
+      mock?.body_en || mock?.body_ja || service.body_ja || ''
+    ),
+    meta_title_ja: fallbackString(
+      service.meta_title_ja || '',
+      mock?.meta_title_ja || ''
+    ),
+    meta_title_en: fallbackString(
+      service.meta_title_en || '',
+      mock?.meta_title_en || mock?.meta_title_ja || ''
+    ),
+    meta_desc_ja: fallbackString(
+      service.meta_desc_ja || '',
+      mock?.meta_desc_ja || ''
+    ),
+    meta_desc_en: fallbackString(
+      service.meta_desc_en || '',
+      mock?.meta_desc_en || mock?.meta_desc_ja || ''
+    ),
+    pricing_enabled: service.pricing_enabled ?? mock?.pricing_enabled ?? false,
+    pricing_title_ja: fallbackString(
+      service.pricing_title_ja || '',
+      mock?.pricing_title_ja || ''
+    ),
+    pricing_title_en: fallbackString(
+      service.pricing_title_en || '',
+      mock?.pricing_title_en || mock?.pricing_title_ja || ''
+    ),
+    pricing_items: fallbackArray(
+      service.pricing_items,
+      mock?.pricing_items ?? []
+    ),
+    pricing_disclaimer_ja: fallbackString(
+      service.pricing_disclaimer_ja || '',
+      mock?.pricing_disclaimer_ja || ''
+    ),
+    pricing_disclaimer_en: fallbackString(
+      service.pricing_disclaimer_en || '',
+      mock?.pricing_disclaimer_en || mock?.pricing_disclaimer_ja || ''
+    )
+  };
+};
+
 const normalizeSettings = (settings: Partial<Settings>): Settings => ({
   x_profile_url: fallbackString(
     settings.x_profile_url,
@@ -320,9 +419,11 @@ export async function getWorks(): Promise<Work[]> {
       orders: '-publishedAt',
       limit: '100'
     });
-    return data.contents.length ? data.contents : mockWorks;
+    return data.contents.length
+      ? data.contents.map((work) => normalizeWork(work))
+      : mockWorks.map((work) => normalizeWork(work));
   } catch {
-    return mockWorks;
+    return mockWorks.map((work) => normalizeWork(work));
   }
 }
 
@@ -332,9 +433,10 @@ export async function getWorkBySlug(slug: string): Promise<Work | undefined> {
       filters: `slug[equals]${slug}`,
       limit: '1'
     });
-    return data.contents[0];
+    return data.contents[0] ? normalizeWork(data.contents[0]) : undefined;
   } catch {
-    return mockWorks.find((work) => work.slug === slug);
+    const fallback = mockWorks.find((work) => work.slug === slug);
+    return fallback ? normalizeWork(fallback) : undefined;
   }
 }
 
@@ -343,9 +445,20 @@ export async function getServices(): Promise<Service[]> {
     const data = await fetchMicroCMS<MicroCMSList<Service>>('/services', {
       limit: '100'
     });
-    return data.contents.length ? data.contents : mockServices;
+    if (!data.contents.length) {
+      return mockServices.map((service) => normalizeService(service));
+    }
+    const normalized = data.contents.map((service) => normalizeService(service));
+    const existingTypes = new Set(normalized.map((service) => service.type));
+    const withFallbacks = [
+      ...normalized,
+      ...mockServices
+        .filter((service) => !existingTypes.has(service.type))
+        .map((service) => normalizeService(service))
+    ];
+    return withFallbacks;
   } catch {
-    return mockServices;
+    return mockServices.map((service) => normalizeService(service));
   }
 }
 

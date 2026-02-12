@@ -7,6 +7,7 @@ import AutoTranslatedBadge from '@/components/AutoTranslatedBadge';
 import WorkOpenTracker from '@/components/WorkOpenTracker';
 import ImageWithFallback from '@/components/ImageWithFallback';
 import FieldNote from '@/components/FieldNote';
+import ProofLinks from '@/components/ProofLinks';
 import { Locale, isLocale, locales, pickLocalizedText } from '@/lib/i18n';
 import { buildAlternates, buildOgImage } from '@/lib/seo';
 import { getWorkBySlug, getWorks } from '@/lib/microcms';
@@ -102,6 +103,16 @@ export default async function WorkDetailPage({
             </div>
             <h1 className="text-3xl font-semibold text-ink-900">{title.text}</h1>
             <p className="text-base text-slate-700">{summary.text}</p>
+            {work.proof_links?.length ? (
+              <div className="rounded-2xl border border-sky-100 bg-sky-50/60 px-4 py-3">
+                <p className="text-xs font-semibold uppercase tracking-wide text-sky-900/70">
+                  Proof
+                </p>
+                <div className="mt-2">
+                  <ProofLinks links={work.proof_links} variant="full" />
+                </div>
+              </div>
+            ) : null}
             {mainSections?.length ? (
               <div className="space-y-4">
                 {mainSections.map((section, index) => (
@@ -181,6 +192,7 @@ export default async function WorkDetailPage({
                 src={work.cover_image?.url}
                 alt={title.text}
                 fallbackLabel="Aki"
+                sizes="(max-width: 1024px) 100vw, 40vw"
               />
             </div>
             {work.gallery_images?.length ? (
@@ -194,6 +206,7 @@ export default async function WorkDetailPage({
                       src={image.url}
                       alt={`${title.text} ${index + 1}`}
                       fallbackLabel="Aki"
+                      sizes="(max-width: 768px) 100vw, 50vw"
                     />
                   </div>
                 ))}

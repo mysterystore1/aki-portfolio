@@ -150,6 +150,7 @@ export default async function ProfilePage({
                       src={photo.url}
                       alt={`${title.text} ${index + 1}`}
                       fallbackLabel="Aki"
+                      sizes="(max-width: 768px) 70vw, 320px"
                     />
                   </div>
                 ))
@@ -158,6 +159,7 @@ export default async function ProfilePage({
                   <ImageWithFallback
                     alt="Aki"
                     fallbackLabel="Aki"
+                    sizes="(max-width: 768px) 70vw, 320px"
                   />
                 </div>
               )}
