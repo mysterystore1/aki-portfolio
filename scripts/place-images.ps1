@@ -3,8 +3,9 @@ $ErrorActionPreference = "Stop"
 $root = Resolve-Path (Join-Path $PSScriptRoot "..")
 $public = Join-Path $root "public\images"
 $gallery = Join-Path $public "gallery"
+$works = Join-Path $public "works"
 
-New-Item -ItemType Directory -Force -Path $public, $gallery | Out-Null
+New-Item -ItemType Directory -Force -Path $public, $gallery, $works | Out-Null
 
 $assetsRoot = "C:\Users\taikan\.cursor\projects\c-Aki\assets"
 
@@ -21,5 +22,32 @@ Copy-Item -Force (Join-Path $assetsRoot "c__Users_taikan_AppData_Roaming_Cursor_
 Copy-Item -Force (Join-Path $assetsRoot "c__Users_taikan_AppData_Roaming_Cursor_User_workspaceStorage_4fbd4bf3f82dff39976546755c087eff_images_G9v2APGaEAA-vmQ-e0b8df87-3bf2-431a-97fd-33824d61618a.png") (Join-Path $gallery "11.png")
 Copy-Item -Force (Join-Path $assetsRoot "c__Users_taikan_AppData_Roaming_Cursor_User_workspaceStorage_4fbd4bf3f82dff39976546755c087eff_images_G9eUayWa4AAMKsI-fd2598a2-55e9-49ed-9369-a6953e38c65d.png") (Join-Path $gallery "12.png")
 
-Copy-Item -Force (Join-Path $assetsRoot "c__Users_taikan_AppData_Roaming_Cursor_User_workspaceStorage_4fbd4bf3f82dff39976546755c087eff_images_image-369c02f2-e696-49b7-b43d-be69e5d94734.png") (Join-Path $public "hero.png")
+Copy-Item -Force (Join-Path $assetsRoot "c__Users_taikan_AppData_Roaming_Cursor_User_workspaceStorage_4fbd4bf3f82dff39976546755c087eff_images_image-038513fc-c408-4504-84d7-83f6986982e0.png") (Join-Path $public "hero-v2.png")
 Copy-Item -Force (Join-Path $assetsRoot "c__Users_taikan_AppData_Roaming_Cursor_User_workspaceStorage_4fbd4bf3f82dff39976546755c087eff_images_image-4f1a20c2-e5eb-436f-a065-4c870b904562.png") (Join-Path $public "media-kit.png")
+Copy-Item -Force (Join-Path $assetsRoot "c__Users_taikan_AppData_Roaming_Cursor_User_workspaceStorage_4fbd4bf3f82dff39976546755c087eff_images_image-038513fc-c408-4504-84d7-83f6986982e0.png") (Join-Path $public "profile.png")
+Copy-Item -Force (Join-Path $assetsRoot "c__Users_taikan_AppData_Roaming_Cursor_User_workspaceStorage_4fbd4bf3f82dff39976546755c087eff_images_image-da9db4f8-792f-46c3-aeb7-9c0d81976334.png") (Join-Path $works "stakestone.png")
+Copy-Item -Force (Join-Path $assetsRoot "c__Users_taikan_AppData_Roaming_Cursor_User_workspaceStorage_4fbd4bf3f82dff39976546755c087eff_images_image-b3e18a9b-a7be-47da-965c-21282f908da6.png") (Join-Path $works "boarding-bridge.png")
+Copy-Item -Force (Join-Path $assetsRoot "c__Users_taikan_AppData_Roaming_Cursor_User_workspaceStorage_4fbd4bf3f82dff39976546755c087eff_images_image-d13a75ff-a26c-4498-b80d-c0e21fc47504.png") (Join-Path $works "mantle-creator-awards.png")
+$logoSource = Join-Path $assetsRoot "c__Users_taikan_AppData_Roaming_Cursor_User_workspaceStorage_4fbd4bf3f82dff39976546755c087eff_images_ChatGPT_Image_2026_2_13__05_39_49-d12b7964-a6b2-4ee0-a57c-b21d6460b1bc.png"
+$logoTarget = Join-Path $public "logo-v2.png"
+$logoPadding = 48
+
+try {
+  Add-Type -AssemblyName System.Drawing
+  $logoBitmap = New-Object System.Drawing.Bitmap $logoSource
+  $logoBitmap.MakeTransparent([System.Drawing.Color]::Black)
+  $width = $logoBitmap.Width + ($logoPadding * 2)
+  $height = $logoBitmap.Height + ($logoPadding * 2)
+  $canvas = New-Object System.Drawing.Bitmap $width, $height
+  $graphics = [System.Drawing.Graphics]::FromImage($canvas)
+  $graphics.Clear([System.Drawing.Color]::Transparent)
+  $graphics.InterpolationMode = [System.Drawing.Drawing2D.InterpolationMode]::HighQualityBicubic
+  $graphics.SmoothingMode = [System.Drawing.Drawing2D.SmoothingMode]::HighQuality
+  $graphics.DrawImage($logoBitmap, $logoPadding, $logoPadding, $logoBitmap.Width, $logoBitmap.Height)
+  $canvas.Save($logoTarget, [System.Drawing.Imaging.ImageFormat]::Png)
+  $graphics.Dispose()
+  $canvas.Dispose()
+  $logoBitmap.Dispose()
+} catch {
+  Copy-Item -Force $logoSource $logoTarget
+}

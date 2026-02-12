@@ -152,6 +152,13 @@ export const copyPack = {
         en: 'Not just what I did, but what changed. With proof links.'
       }
     },
+    youtube: {
+      title: { ja: 'YouTube（サムネで見る）', en: 'YouTube highlights' },
+      lead: {
+        ja: '出演・企画の一部です。クリックで視聴できます。',
+        en: 'A few samples from appearances and content. Click to watch.'
+      }
+    },
     process: {
       title: { ja: '進め方', en: 'How it works' },
       steps: {

@@ -144,7 +144,7 @@ export default async function ProfilePage({
                 (profile.photos || []).map((photo, index) => (
                   <div
                     key={`${photo.url}-${index}`}
-                    className="relative aspect-[4/5] overflow-hidden rounded-3xl bg-slate-100"
+                    className="relative mx-auto aspect-[4/5] w-full max-w-[260px] overflow-hidden rounded-3xl bg-slate-100 sm:max-w-[300px]"
                   >
                     <ImageWithFallback
                       src={photo.url}
@@ -154,7 +154,7 @@ export default async function ProfilePage({
                   </div>
                 ))
               ) : (
-                <div className="relative aspect-[4/5] overflow-hidden rounded-3xl bg-slate-100">
+                <div className="relative mx-auto aspect-[4/5] w-full max-w-[260px] overflow-hidden rounded-3xl bg-slate-100 sm:max-w-[300px]">
                   <ImageWithFallback
                     alt="Aki"
                     fallbackLabel="Aki"

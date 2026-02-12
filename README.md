@@ -26,7 +26,12 @@ pnpm start
 
 開発時にローカル画像を使う場合は `public/images` に配置します。
 
-- ヒーロー画像: `public/images/hero.png`
+- ヒーロー画像: `public/images/hero-v2.png`
+- プロフィール画像: `public/images/profile.png`
+- 実績ハイライト（StakeStone）: `public/images/works/stakestone.png`
+- 実績ハイライト（boarding bridge）: `public/images/works/boarding-bridge.png`
+- 実績ハイライト（Mantle）: `public/images/works/mantle-creator-awards.png`
+- ロゴ: `public/images/logo-v2.png`
 - ギャラリー画像: `public/images/gallery/01.png` 〜 `12.png`
 
 ※ 画像が未配置でもプレースホルダー表示されます。

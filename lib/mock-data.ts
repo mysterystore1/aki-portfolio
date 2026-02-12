@@ -146,7 +146,7 @@ export const mockProfile: Profile = {
   activities_en: [...copyPack.profile.activities.en],
   photos: [
     {
-      url: '/images/hero.png',
+      url: '/images/profile.png',
       width: 1000,
       height: 1000
     }
@@ -169,6 +169,25 @@ const toSections = (
       : 'default'
   }));
 
+const workCoverImages: Record<string, { url: string; width: number; height: number }> =
+  {
+    'stakestone-jp-community': {
+      url: '/images/works/stakestone.png',
+      width: 1600,
+      height: 900
+    },
+    'boarding-bridge-ama-host': {
+      url: '/images/works/boarding-bridge.png',
+      width: 1600,
+      height: 900
+    },
+    'mantle-creator-awards': {
+      url: '/images/works/mantle-creator-awards.png',
+      width: 1600,
+      height: 900
+    }
+  };
+
 export const mockWorks: Work[] = copyPack.works.items.map((item, index) => ({
   id: `work-${index + 1}`,
   slug: item.slug,
@@ -180,6 +199,7 @@ export const mockWorks: Work[] = copyPack.works.items.map((item, index) => ({
   metrics: item.metrics.map((metric) => ({ ...metric })),
   proof_links: [],
   date_range: item.dateRange,
+  cover_image: workCoverImages[item.slug],
   detail_sections_ja: toSections(item.detail.ja.sections),
   detail_sections_en: toSections(item.detail.en.sections)
 }));

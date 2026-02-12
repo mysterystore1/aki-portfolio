@@ -104,6 +104,20 @@ export default async function Home({
     );
 
   const serviceCards = copyPack.home.services.cards;
+  const youtubeVideos = [
+    {
+      id: '6CbgC2CDAck',
+      url: 'https://youtu.be/6CbgC2CDAck?si=ieZOV8Katbql-wRF'
+    },
+    {
+      id: '4_p61Hj6T5Q',
+      url: 'https://youtu.be/4_p61Hj6T5Q?si=OVfmlGPI1h4gesN7'
+    },
+    {
+      id: '2miN2k9jGzY',
+      url: 'https://youtu.be/2miN2k9jGzY?si=E6_4Vcs_H9ExR0ea'
+    }
+  ];
 
   const baseUrl = getBaseUrl();
   const profileSchema = {
@@ -188,12 +202,12 @@ export default async function Home({
                 </Link>
               </div>
             </div>
-            <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-3xl shadow-[0_20px_60px_rgba(15,23,42,0.2)] motion-safe:transition motion-safe:hover:-translate-y-1">
+            <div className="relative mx-auto aspect-[4/5] w-full max-w-[280px] overflow-hidden rounded-3xl shadow-[0_20px_60px_rgba(15,23,42,0.2)] motion-safe:transition motion-safe:hover:-translate-y-1 sm:max-w-[320px] lg:max-w-[340px]">
               <ImageWithFallback
-                src="/images/hero.png"
+                src="/images/hero-v2.png"
                 alt={copyPack.home.hero.rightCard.name}
                 fallbackLabel={copyPack.home.hero.rightCard.name}
-                imageClassName="object-cover"
+                imageClassName="object-[center_top]"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-ink-900/70 via-ink-900/10 to-transparent" />
               <div className="absolute bottom-5 left-5 text-white">
@@ -360,6 +374,58 @@ export default async function Home({
           </Container>
         </section>
       ) : null}
+
+      <section className="bg-white">
+        <Container className="py-14 sm:py-20">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="rounded-full bg-ink-900 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-white">
+                  YouTube
+                </span>
+              </div>
+              <h2 className="mt-3 text-2xl font-semibold text-ink-900">
+                {resolvedLocale === 'jp'
+                  ? copyPack.home.youtube.title.ja
+                  : copyPack.home.youtube.title.en}
+              </h2>
+              <p className="mt-2 text-sm text-slate-600">
+                {resolvedLocale === 'jp'
+                  ? copyPack.home.youtube.lead.ja
+                  : copyPack.home.youtube.lead.en}
+              </p>
+            </div>
+          </div>
+          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {youtubeVideos.map((video, index) => (
+              <a
+                key={video.id}
+                href={video.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group rounded-3xl border border-slate-100 bg-white p-3 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+              >
+                <div className="relative aspect-[16/9] overflow-hidden rounded-2xl bg-slate-100">
+                  <ImageWithFallback
+                    src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`}
+                    alt={`YouTube video ${index + 1}`}
+                    fallbackLabel="YouTube"
+                    imageClassName="object-cover transition duration-300 motion-safe:group-hover:scale-[1.03]"
+                  />
+                </div>
+                <div className="mt-3 flex items-center justify-between text-xs text-slate-500">
+                  <span>
+                    {resolvedLocale === 'jp' ? `動画 ${index + 1}` : `Video ${index + 1}`}
+                  </span>
+                  <span className="font-semibold text-ink-900">
+                    {resolvedLocale === 'jp' ? '視聴する' : 'Watch'}
+                  </span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </Container>
+      </section>
 
       <section className="bg-white">
         <Container className="py-14 sm:py-20">
