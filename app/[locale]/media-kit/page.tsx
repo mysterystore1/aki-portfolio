@@ -40,6 +40,7 @@ export default async function MediaKitPage({
   if (!isLocale(locale)) notFound();
   const resolvedLocale = locale as Locale;
   const settings = await getSettings();
+  const mediaKitPdfUrl = settings.media_kit_pdf_url || '/media-kit.pdf';
   const includes =
     resolvedLocale === 'jp'
       ? copyPack.mediaKit.includes.ja
@@ -95,7 +96,8 @@ export default async function MediaKitPage({
 
             <div className="mt-8 flex flex-wrap gap-3">
               <a
-                href="#"
+                href={mediaKitPdfUrl}
+                download
                 className="inline-flex items-center rounded-full bg-ink-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-ink-700"
               >
                 {resolvedLocale === 'jp'
@@ -136,7 +138,11 @@ export default async function MediaKitPage({
           </div>
 
           <div className="rounded-3xl border border-slate-100 bg-slate-50 p-6 shadow-sm">
-            <div className="relative aspect-[3/4] overflow-hidden rounded-2xl bg-slate-100">
+            <a
+              href={mediaKitPdfUrl}
+              download
+              className="relative block aspect-[3/4] overflow-hidden rounded-2xl bg-slate-100 transition hover:-translate-y-1 hover:shadow-lg"
+            >
               <ImageWithFallback
                 src="/images/media-kit.png"
                 alt="Media kit preview"
@@ -144,7 +150,7 @@ export default async function MediaKitPage({
                 imageClassName="object-cover"
                 sizes="(max-width: 1024px) 100vw, 360px"
               />
-            </div>
+            </a>
             <div className="mt-4 text-xs text-slate-500">
               {resolvedLocale === 'jp'
                 ? 'PDFプレビュー（プレースホルダー）'

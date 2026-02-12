@@ -66,6 +66,7 @@ OPENAI_API_KEY=your-openai-api-key
 - `x_profile_url` (text)
 - `telegram_url` (text)
 - `youtube_url` (text)
+- `media_kit_pdf_url` (text, optional)
 - `hero_copy_ja` (text)
 - `hero_copy_en` (text)
 - `hero_heading_ja` (text)

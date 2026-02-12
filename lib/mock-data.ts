@@ -5,6 +5,7 @@ export const mockSettings: Settings = {
   x_profile_url: copyPack.settings.links.x_profile_url,
   telegram_url: copyPack.settings.links.telegram_url,
   youtube_url: copyPack.settings.links.youtube_url,
+  media_kit_pdf_url: '/media-kit.pdf',
   hero_copy_ja: copyPack.home.hero.sub.ja,
   hero_copy_en: copyPack.home.hero.sub.en,
   hero_heading_ja: copyPack.home.hero.heading.ja,

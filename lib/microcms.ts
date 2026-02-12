@@ -15,6 +15,7 @@ export type Settings = {
   x_profile_url: string;
   telegram_url: string;
   youtube_url: string;
+  media_kit_pdf_url?: string;
   hero_copy_ja?: string;
   hero_copy_en?: string;
   hero_heading_ja?: string;
@@ -250,6 +251,10 @@ const normalizeSettings = (settings: Partial<Settings>): Settings => ({
     mockSettings.telegram_url
   ),
   youtube_url: fallbackString(settings.youtube_url, mockSettings.youtube_url),
+  media_kit_pdf_url: fallbackString(
+    settings.media_kit_pdf_url || '',
+    mockSettings.media_kit_pdf_url || '/media-kit.pdf'
+  ),
   hero_copy_ja: fallbackString(settings.hero_copy_ja, mockSettings.hero_copy_ja),
   hero_copy_en: fallbackString(
     settings.hero_copy_en || '',
