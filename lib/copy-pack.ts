@@ -97,8 +97,8 @@ export const copyPack = {
         'AMA: ~1,000 comments / ~500 listeners on average (ongoing)'
       ],
       note: {
-        ja: '現場メモ：数字は“何の数字か”が大事。曖昧な指標は出さない派です。',
-        en: 'Field note: numbers must have meaning. If it’s unclear, I don’t use it.'
+        ja: '数字は“何の数字か”が大事。曖昧な指標は出さない派です。',
+        en: 'Numbers must have meaning. If it’s unclear, I don’t use it.'
       }
     },
     services: {
@@ -113,8 +113,8 @@ export const copyPack = {
             en: 'Agenda + questions first, then tight pacing on the day.\nI keep it clear and engaging.'
           },
           note: {
-            ja: '現場メモ：コメントが動くのは“質問の設計”が9割。',
-            en: 'Field note: engagement starts with better questions.'
+            ja: 'コメントが動くのは“質問の設計”が9割。',
+            en: 'Engagement starts with better questions.'
           }
         },
         {
@@ -126,8 +126,8 @@ export const copyPack = {
             en: 'Ops, events, partnerships.\nI build loops that keep the community alive and moving.'
           },
           note: {
-            ja: '現場メモ：参加しやすさ＝定着率。入口を軽くする。',
-            en: 'Field note: low friction drives retention.'
+            ja: '参加しやすさ＝定着率。入口を軽くする。',
+            en: 'Low friction drives retention.'
           }
         },
         {
@@ -139,8 +139,8 @@ export const copyPack = {
             en: 'I turn complexity into action.\nNot just “understood,” but “what to do next.”'
           },
           note: {
-            ja: '現場メモ：3分で伝わる要点にするのが好き。',
-            en: 'Field note: I love sharp 3-minute takeaways.'
+            ja: '3分で伝わる要点にするのが好き。',
+            en: 'I love sharp 3-minute takeaways.'
           }
         }
       ]
@@ -178,8 +178,8 @@ export const copyPack = {
         ]
       },
       note: {
-        ja: '現場メモ：最初のDMは短いほど進みます。必要な情報だけでOK。',
-        en: 'Field note: shorter first messages move faster. Keep it simple.'
+        ja: '最初のDMは短いほど進みます。必要な情報だけでOK。',
+        en: 'Shorter first messages move faster. Keep it simple.'
       }
     },
     faq: {
@@ -227,8 +227,8 @@ export const copyPack = {
       en: 'Gallery (Field Proof)'
     },
     note: {
-      ja: '現場メモ：写真があると、話が一気に早い。',
-      en: 'Field note: photos speed up trust.'
+      ja: '写真があると、話が一気に早い。',
+      en: 'Photos speed up trust.'
     },
     items: [
       {
@@ -318,8 +318,8 @@ export const copyPack = {
           en: 'Clarity first. Then energy.\nI make sessions understandable and engaging.'
         },
         note: {
-          ja: '現場メモ：質問が良いと、登壇者が勝手に輝く。',
-          en: 'Field note: better questions make speakers shine.'
+          ja: '質問が良いと、登壇者が勝手に輝く。',
+          en: 'Better questions make speakers shine.'
         }
       },
       whatYouGet: {
@@ -422,8 +422,8 @@ export const copyPack = {
           en: 'Attention fades fast.\nI build loops: join → stay → invite.'
         },
         note: {
-          ja: '現場メモ：入口が軽いほど、コアが増える。',
-          en: 'Field note: lower friction grows core members.'
+          ja: '入口が軽いほど、コアが増える。',
+          en: 'Lower friction grows core members.'
         }
       },
       items: {
@@ -466,8 +466,8 @@ export const copyPack = {
           en: 'Not just “I get it.”\nI write and edit toward a next action.'
         },
         note: {
-          ja: '現場メモ：3分で伝わる要点に削るのが好き。',
-          en: 'Field note: I love cutting to a 3-minute core.'
+          ja: '3分で伝わる要点に削るのが好き。',
+          en: 'I love cutting to a 3-minute core.'
         }
       },
       items: {
@@ -598,7 +598,7 @@ export const copyPack = {
                 ]
               },
               {
-                h: '現場メモ',
+                h: '補足',
                 p: '参加のハードルを下げると、コアが増える。まず入口を軽く。'
               }
             ]
@@ -625,7 +625,7 @@ export const copyPack = {
                 ]
               },
               {
-                h: 'Field note',
+                h: 'Note',
                 p: 'Lower friction grows core members. Start with the entry point.'
               }
             ]
@@ -668,7 +668,7 @@ export const copyPack = {
                 ]
               },
               {
-                h: '現場メモ',
+                h: '補足',
                 p: 'コメントが動かない時は、まず質問の角度を変える。'
               }
             ]
@@ -688,7 +688,7 @@ export const copyPack = {
                 list: ['~1,000 comments on average', '~500 listeners including archive']
               },
               {
-                h: 'Field note',
+                h: 'Note',
                 p: 'If engagement drops, change the question angle first.'
               }
             ]
@@ -714,7 +714,7 @@ export const copyPack = {
                 list: ['企画（視点の差別化）', '構成（短く・具体に）', '表現（伝わる見せ方）']
               },
               { h: '結果', list: ['トップ表彰（応募600名以上の中）'] },
-              { h: '現場メモ', p: '伝え方が変わると、理解の速度が変わる。' }
+              { h: '補足', p: '伝え方が変わると、理解の速度が変わる。' }
             ]
           },
           en: {
@@ -725,7 +725,7 @@ export const copyPack = {
                 list: ['Unique angle', 'Short, concrete structure', 'Clear storytelling and visuals']
               },
               { h: 'Outcome', list: ['Top recognition among 600+ applicants'] },
-              { h: 'Field note', p: 'Better framing changes the speed of understanding.' }
+              { h: 'Note', p: 'Better framing changes the speed of understanding.' }
             ]
           }
         }
@@ -775,8 +775,8 @@ export const copyPack = {
       telegram: { ja: 'Telegramで相談', en: 'Message on Telegram' }
     },
     note: {
-      ja: '現場メモ：PDFがなくても、このページをそのまま転送でOK。',
-      en: 'Field note: even without the PDF, this page is forward-ready.'
+      ja: 'PDFがなくても、このページをそのまま転送でOK。',
+      en: 'Even without the PDF, this page is forward-ready.'
     }
   }
 } as const;

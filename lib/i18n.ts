@@ -22,6 +22,10 @@ export function withLocale(path: string, locale: Locale): string {
   return normalized.replace(/^\/(jp|en)/, `/${locale}`);
 }
 
+export function pickByLocale<T>(locale: Locale, value: { ja: T; en: T }): T {
+  return locale === 'jp' ? value.ja : value.en;
+}
+
 export function pickLocalizedText({
   locale,
   ja,

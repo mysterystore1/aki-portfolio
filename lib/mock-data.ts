@@ -165,7 +165,11 @@ const toSections = (
     heading: section.h,
     body: section.p,
     list: section.list ? [...section.list] : undefined,
-    tone: section.h.includes('現場メモ') || section.h.includes('Field note')
+    tone:
+      section.h.includes('現場メモ') ||
+      section.h.includes('補足') ||
+      section.h.includes('Field note') ||
+      section.h.includes('Note')
       ? 'note'
       : 'default'
   }));

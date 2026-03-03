@@ -175,46 +175,55 @@ export default async function Home({
   return (
     <>
       <JsonLd id="profile-jsonld" data={profileSchema} />
-      <section className="bg-grid">
-        <Container className="py-16 sm:py-20">
+      <section className="relative overflow-hidden bg-grid">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+          <div
+            className="absolute inset-0 bg-cover bg-center opacity-85 blur-[0.25px] saturate-110"
+            style={{ backgroundImage: "url('/images/hero-bg.png')" }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-ink-900/10 via-transparent to-transparent" />
+        </div>
+        <Container className="relative z-10 py-16 sm:py-20">
           <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
             <div className="flex flex-col gap-6">
-              <div className="flex items-center gap-3 text-xs text-slate-500">
-                <span className="rounded-full bg-ink-900 px-3 py-1 font-semibold uppercase tracking-wide text-white">
+              <div className="rounded-3xl border border-white/30 bg-white/40 px-6 py-6 shadow-[0_16px_40px_rgba(15,23,42,0.16)] backdrop-blur-sm sm:px-8 sm:py-8">
+                <div className="flex items-center gap-3 text-xs text-slate-500">
+                  <span className="rounded-full bg-ink-900 px-3 py-1 font-semibold uppercase tracking-wide text-white">
+                    {resolvedLocale === 'jp'
+                      ? copyPack.home.hero.badge.ja
+                      : copyPack.home.hero.badge.en}
+                  </span>
+                  {resolvedLocale === 'en' && heroAuto && <AutoTranslatedBadge />}
+                </div>
+                <h1 className="mt-4 whitespace-pre-line text-3xl font-semibold leading-tight text-ink-900 sm:text-4xl">
+                  {heroHeading.text}
+                </h1>
+                <p className="mt-4 whitespace-pre-line text-base leading-7 text-slate-700 sm:text-lg">
+                  {heroSub.text}
+                </p>
+                <p className="mt-3 text-xs text-slate-500">
                   {resolvedLocale === 'jp'
-                    ? copyPack.home.hero.badge.ja
-                    : copyPack.home.hero.badge.en}
-                </span>
-                {resolvedLocale === 'en' && heroAuto && <AutoTranslatedBadge />}
-              </div>
-              <h1 className="whitespace-pre-line text-3xl font-semibold leading-tight text-ink-900 sm:text-4xl">
-                {heroHeading.text}
-              </h1>
-              <p className="whitespace-pre-line text-base leading-7 text-slate-700 sm:text-lg">
-                {heroSub.text}
-              </p>
-              <p className="text-xs text-slate-500">
-                {resolvedLocale === 'jp'
-                  ? copyPack.home.hero.micro.ja
-                  : copyPack.home.hero.micro.en}
-              </p>
-              <div className="flex flex-wrap gap-3">
-                <Link
-                  href={`/${resolvedLocale}/works`}
-                  className="rounded-full bg-ink-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-ink-700"
-                >
-                  {resolvedLocale === 'jp'
-                    ? copyPack.home.hero.primaryCta.ja
-                    : copyPack.home.hero.primaryCta.en}
-                </Link>
-                <Link
-                  href={`/${resolvedLocale}/services/mc`}
-                  className="rounded-full border border-slate-200 px-6 py-3 text-sm font-semibold text-ink-900 transition hover:border-ink-900"
-                >
-                  {resolvedLocale === 'jp'
-                    ? copyPack.home.hero.secondaryCta.ja
-                    : copyPack.home.hero.secondaryCta.en}
-                </Link>
+                    ? copyPack.home.hero.micro.ja
+                    : copyPack.home.hero.micro.en}
+                </p>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <Link
+                    href={`/${resolvedLocale}/works`}
+                    className="rounded-full bg-ink-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-ink-700"
+                  >
+                    {resolvedLocale === 'jp'
+                      ? copyPack.home.hero.primaryCta.ja
+                      : copyPack.home.hero.primaryCta.en}
+                  </Link>
+                  <Link
+                    href={`/${resolvedLocale}/services/mc`}
+                    className="rounded-full border border-slate-200 bg-white/80 px-6 py-3 text-sm font-semibold text-ink-900 transition hover:border-ink-900"
+                  >
+                    {resolvedLocale === 'jp'
+                      ? copyPack.home.hero.secondaryCta.ja
+                      : copyPack.home.hero.secondaryCta.en}
+                  </Link>
+                </div>
               </div>
             </div>
             <div className="relative mx-auto aspect-[4/5] w-full max-w-[280px] overflow-hidden rounded-3xl shadow-[0_20px_60px_rgba(15,23,42,0.2)] motion-safe:transition motion-safe:hover:-translate-y-1 sm:max-w-[320px] lg:max-w-[340px]">

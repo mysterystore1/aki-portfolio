@@ -1,7 +1,7 @@
 'use client';
 
 import type { Settings } from '@/lib/microcms';
-import type { Locale } from '@/lib/i18n';
+import { pickByLocale, type Locale } from '@/lib/i18n';
 import { trackEvent } from '@/lib/analytics';
 import { copyPack } from '@/lib/copy-pack';
 
@@ -13,11 +13,8 @@ export default function FixedCTA({
   locale: Locale;
 }) {
   const labels = {
-    x: locale === 'jp' ? copyPack.global.cta.x.label.ja : copyPack.global.cta.x.label.en,
-    telegram:
-      locale === 'jp'
-        ? copyPack.global.cta.telegram.label.ja
-        : copyPack.global.cta.telegram.label.en
+    x: pickByLocale(locale, copyPack.global.cta.x.label),
+    telegram: pickByLocale(locale, copyPack.global.cta.telegram.label)
   };
 
   return (

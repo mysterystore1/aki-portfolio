@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import type { Settings } from '@/lib/microcms';
-import { Locale, localeLabels, otherLocale } from '@/lib/i18n';
+import { Locale, localeLabels, otherLocale, pickByLocale, withLocale } from '@/lib/i18n';
 import { trackEvent } from '@/lib/analytics';
 import { copyPack } from '@/lib/copy-pack';
 
@@ -16,20 +16,18 @@ export default function SiteHeader({
 }) {
   const pathname = usePathname() || `/${locale}`;
   const nextLocale = otherLocale(locale);
-  const switchPath = pathname.replace(/^\/(jp|en)/, `/${nextLocale}`);
+  const switchPath = withLocale(pathname, nextLocale);
 
   const nav = copyPack.navigation.items.map((item) => ({
-    href: item.href.replace('/jp', `/${locale}`),
-    label: locale === 'jp' ? item.label.ja : item.label.en
+    href: withLocale(item.href, locale),
+    label: pickByLocale(locale, item.label)
   }));
 
   return (
     <header className="sticky top-0 z-40 border-b border-slate-100 bg-white/80 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
         <Link href={`/${locale}`} className="text-sm font-semibold text-ink-900">
-          {locale === 'jp'
-            ? copyPack.navigation.siteName.ja
-            : copyPack.navigation.siteName.en}
+          {pickByLocale(locale, copyPack.navigation.siteName)}
         </Link>
 
         <nav className="hidden items-center gap-6 text-sm text-slate-600 md:flex">
@@ -44,9 +42,7 @@ export default function SiteHeader({
             rel="noopener noreferrer"
             className="rounded-full border border-slate-200 px-3 py-1 text-xs font-semibold text-slate-600 hover:text-ink-900"
           >
-            {locale === 'jp'
-              ? copyPack.navigation.youtubeCta.label.ja
-              : copyPack.navigation.youtubeCta.label.en}
+            {pickByLocale(locale, copyPack.navigation.youtubeCta.label)}
           </a>
         </nav>
 

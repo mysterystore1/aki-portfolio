@@ -1,5 +1,5 @@
 import type { Settings } from '@/lib/microcms';
-import type { Locale } from '@/lib/i18n';
+import { pickByLocale, type Locale } from '@/lib/i18n';
 import { copyPack } from '@/lib/copy-pack';
 
 export default function SiteFooter({
@@ -13,7 +13,7 @@ export default function SiteFooter({
     <footer className="border-t border-slate-100 bg-white">
       <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-10 text-sm text-slate-600 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
         <p>
-          {locale === 'jp' ? copyPack.global.footer.ja : copyPack.global.footer.en}
+          {pickByLocale(locale, copyPack.global.footer)}
         </p>
         <a
           href={settings.youtube_url}

@@ -2,10 +2,7 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { getSettings } from '@/lib/microcms';
 import { isLocale, Locale, locales } from '@/lib/i18n';
-import SiteHeader from '@/components/SiteHeader';
-import SiteFooter from '@/components/SiteFooter';
-import FixedCTA from '@/components/FixedCTA';
-import ContactPanel from '@/components/ContactPanel';
+import LocaleLayoutClient from '@/components/LocaleLayoutClient';
 
 export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -46,12 +43,8 @@ export default async function LocaleLayout({
   const settings = await getSettings();
 
   return (
-    <div className="min-h-screen bg-white">
-      <SiteHeader locale={resolvedLocale} settings={settings} />
-      <main className="pb-28 sm:pb-32">{children}</main>
-      <ContactPanel locale={resolvedLocale} settings={settings} />
-      <SiteFooter settings={settings} locale={resolvedLocale} />
-      <FixedCTA settings={settings} locale={resolvedLocale} />
-    </div>
+    <LocaleLayoutClient locale={resolvedLocale} settings={settings}>
+      {children}
+    </LocaleLayoutClient>
   );
 }

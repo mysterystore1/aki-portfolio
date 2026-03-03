@@ -23,6 +23,7 @@ Copy-Item -Force (Join-Path $assetsRoot "c__Users_taikan_AppData_Roaming_Cursor_
 Copy-Item -Force (Join-Path $assetsRoot "c__Users_taikan_AppData_Roaming_Cursor_User_workspaceStorage_4fbd4bf3f82dff39976546755c087eff_images_G9eUayWa4AAMKsI-fd2598a2-55e9-49ed-9369-a6953e38c65d.png") (Join-Path $gallery "12.png")
 
 Copy-Item -Force (Join-Path $assetsRoot "c__Users_taikan_AppData_Roaming_Cursor_User_workspaceStorage_4fbd4bf3f82dff39976546755c087eff_images_image-038513fc-c408-4504-84d7-83f6986982e0.png") (Join-Path $public "hero-v2.png")
+Copy-Item -Force (Join-Path $assetsRoot "c__Users_taikan_AppData_Roaming_Cursor_User_workspaceStorage_4fbd4bf3f82dff39976546755c087eff_images_image-743a73d5-7a12-4c1b-810f-4a6d1e22907b.png") (Join-Path $public "hero-bg.png")
 Copy-Item -Force (Join-Path $assetsRoot "c__Users_taikan_AppData_Roaming_Cursor_User_workspaceStorage_4fbd4bf3f82dff39976546755c087eff_images_image-4f1a20c2-e5eb-436f-a065-4c870b904562.png") (Join-Path $public "media-kit.png")
 Copy-Item -Force (Join-Path $assetsRoot "c__Users_taikan_AppData_Roaming_Cursor_User_workspaceStorage_4fbd4bf3f82dff39976546755c087eff_images_image-038513fc-c408-4504-84d7-83f6986982e0.png") (Join-Path $public "profile.png")
 Copy-Item -Force (Join-Path $assetsRoot "c__Users_taikan_AppData_Roaming_Cursor_User_workspaceStorage_4fbd4bf3f82dff39976546755c087eff_images_image-da9db4f8-792f-46c3-aeb7-9c0d81976334.png") (Join-Path $works "stakestone.png")

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aki — Japanese Crypto KOL / MC / Event Coordinator</title>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@300;400;500;700;900&family=Marcellus&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blush: #E8A0B4;
+  --blush-light: #FDF2F5;
+  --blush-pale: #FFF8FA;
+  --blush-text: #C97A8E;
+  --rose-accent: #D4708F;
+  --ink: #2C2C3A;
+  --ink-soft: #4A4A5C;
+  --gray: #8E8E9C;
+  --gray-light: #E8E8ED;
+  --gray-pale: #F5F5F7;
+  --white: #FFFFFF;
+  --bg: #FEFCFD;
+  --card-shadow: 0 2px 16px rgba(44,44,58,0.05);
+  --card-hover: 0 8px 32px rgba(44,44,58,0.08);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Zen Kaku Gothic New', 'Sora', sans-serif;
+  background: var(--bg); color: var(--ink);
+  overflow-x: hidden; line-height: 1.8;
+}
+
+/* ─── Nav ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 0.9rem 2rem;
+  display: flex; justify-content: space-between; align-items: center;
+  background: rgba(254,252,253,0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s;
+}
+nav.scrolled { border-bottom-color: var(--gray-light); }
+.nav-logo {
+  font-family: 'Marcellus', serif;
+  font-size: 1.3rem; color: var(--ink);
+  letter-spacing: 0.04em;
+}
+.nav-logo span { color: var(--blush); }
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.72rem; font-weight: 500;
+  color: var(--gray); text-decoration: none;
+  letter-spacing: 0.06em; transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--rose-accent); }
+.nav-contact {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.7rem; font-weight: 600;
+  padding: 0.5rem 1.3rem;
+  background: var(--ink);
+  color: var(--white); border-radius: 20px;
+  text-decoration: none; transition: all 0.3s;
+  letter-spacing: 0.03em;
+}
+.nav-contact:hover { background: var(--rose-accent); }
+
+/* ─── Hero ─── */
+.hero {
+  min-height: 100vh; display: flex; align-items: center;
+  background: var(--white);
+  position: relative; overflow: hidden;
+  padding: 6rem 2rem 4rem;
+}
+.hero-deco1 {
+  position: absolute; top: -100px; right: -80px;
+  width: 400px; height: 400px;
+  background: var(--blush-light);
+  border-radius: 50%;
+  opacity: 0.7;
+}
+.hero-deco2 {
+  position: absolute; bottom: -60px; left: -40px;
+  width: 250px; height: 250px;
+  background: var(--gray-pale);
+  border-radius: 50%;
+  opacity: 0.6;
+}
+.hero-inner {
+  max-width: 1100px; margin: 0 auto; width: 100%;
+  position: relative; z-index: 2;
+  display: grid; grid-template-columns: 1fr 0.8fr;
+  gap: 4rem; align-items: center;
+}
+.hero-text { animation: fadeIn 0.8s ease 0.2s both; }
+
+.hero-label {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-family: 'Sora', sans-serif;
+  font-size: 0.65rem; font-weight: 600;
+  color: var(--blush-text);
+  background: var(--blush-light);
+  padding: 0.35rem 0.9rem; border-radius: 16px;
+  margin-bottom: 1.5rem; letter-spacing: 0.08em;
+}
+.hero-label .dot {
+  width: 5px; height: 5px;
+  background: var(--blush);
+  border-radius: 50%;
+}
+.hero-name {
+  font-family: 'Marcellus', serif;
+  font-size: 3.8rem; color: var(--ink);
+  line-height: 1.15; margin-bottom: 0.8rem;
+  letter-spacing: 0.02em;
+}
+.hero-name em {
+  font-style: normal;
+  color: var(--rose-accent);
+}
+.hero-sub {
+  font-size: 0.82rem; font-weight: 400;
+  color: var(--gray); letter-spacing: 0.12em;
+  margin-bottom: 1.5rem;
+}
+.hero-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
+.hero-tag {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.65rem; font-weight: 500;
+  padding: 0.3rem 0.8rem; border-radius: 14px;
+  border: 1px solid var(--gray-light);
+  color: var(--ink-soft);
+  letter-spacing: 0.03em;
+}
+.hero-desc {
+  font-size: 0.88rem; font-weight: 400;
+  color: var(--ink-soft); line-height: 1.9;
+  max-width: 460px;
+}
+.hero-desc strong { color: var(--ink); font-weight: 700; }
+
+.hero-btns { display: flex; gap: 0.7rem; margin-top: 1.8rem; align-items: center; }
+.btn-primary {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.75rem; font-weight: 600;
+  padding: 0.65rem 1.6rem;
+  background: var(--ink); color: var(--white);
+  border-radius: 22px; text-decoration: none;
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  transition: all 0.3s;
+}
+.btn-primary:hover { background: var(--rose-accent); transform: translateY(-1px); }
+.btn-primary svg { width: 14px; height: 14px; fill: currentColor; }
+.btn-ghost {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.75rem; font-weight: 500;
+  color: var(--ink-soft); text-decoration: none;
+  display: inline-flex; align-items: center; gap: 0.3rem;
+  transition: color 0.3s;
+}
+.btn-ghost:hover { color: var(--rose-accent); }
+
+/* Hero Visual — 実写真用 */
+.hero-visual {
+  position: relative; display: flex;
+  justify-content: center; align-items: center;
+  animation: fadeIn 0.8s ease 0.4s both;
+}
+.photo-frame {
+  width: 320px; height: 400px;
+  border-radius: 24px;
+  background: linear-gradient(160deg, var(--blush-light), var(--gray-pale));
+  position: relative; overflow: hidden;
+  box-shadow: var(--card-shadow);
+}
+.photo-frame img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  vertical-align: middle;
+}
+.photo-placeholder {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 0.6rem;
+}
+.photo-placeholder .icon { font-size: 2.8rem; opacity: 0.5; }
+.photo-placeholder .txt {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.65rem; color: var(--gray);
+  letter-spacing: 0.1em; text-transform: uppercase;
+}
+
+/* Floating badges */
+.fbadge {
+  position: absolute;
+  background: var(--white);
+  border-radius: 14px;
+  padding: 0.6rem 0.9rem;
+  box-shadow: var(--card-shadow);
+  display: flex; align-items: center; gap: 0.5rem;
+  animation: float 3.5s ease-in-out infinite;
+}
+.fbadge .num {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.9rem; font-weight: 700; color: var(--ink);
+  line-height: 1.1;
+}
+.fbadge .lbl {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.55rem; font-weight: 500; color: var(--gray);
+}
+.fb1 { top: 8%; left: -15%; animation-delay: 0s; }
+.fb2 { bottom: 18%; right: -12%; animation-delay: 0.6s; }
+.fb3 { bottom: 2%; left: -8%; animation-delay: 1.2s; }
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes fadeIn { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+
+/* 以下、元のスタイル（Stats, Posts, Highlights, Marquee, Timeline, Past, CTA, footer, responsive, .reveal）は同一のため省略せず次のコメントで区切る */
+/* ─── Stats Bar ─── */
+.stats-bar {
+  background: var(--blush-pale);
+  padding: 2rem 2rem;
+  border-top: 1px solid rgba(232,160,180,0.15);
+  border-bottom: 1px solid rgba(232,160,180,0.15);
+}
+.stats-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: flex; justify-content: space-around;
+  flex-wrap: wrap; gap: 1.5rem;
+}
+.stat { text-align: center; }
+.stat-num {
+  font-family: 'Marcellus', serif;
+  font-size: 1.8rem; color: var(--rose-accent);
+}
+.stat-label {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.6rem; font-weight: 500;
+  color: var(--gray); letter-spacing: 0.1em;
+  text-transform: uppercase; margin-top: 0.15rem;
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-logo">Aki<span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="#posts">Posts</a></li>
+    <li><a href="#highlights">Highlights</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#past">Achievements</a></li>
+  </ul>
+  <a href="#contact" class="nav-contact">Contact</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-deco1"></div>
+  <div class="hero-deco2"></div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-label"><span class="dot"></span> Japanese Crypto KOL</div>
+      <h1 class="hero-name">Hello,<br>I'm <em>Aki</em></h1>
+      <p class="hero-sub">クリプト KOL ・ MC ・ コンテンツクリエイター</p>
+      <div class="hero-tags">
+        <span class="hero-tag">KOL</span>
+        <span class="hero-tag">MC / Host</span>
+        <span class="hero-tag">Event Coordinator</span>
+        <span class="hero-tag">Content Creator</span>
+      </div>
+      <p class="hero-desc"><strong>コスプレ</strong>と<strong>コメディ</strong>を交えた独自スタイルで、DeFi・チェーン・ブロックチェーンゲームをわかりやすく解説。日本でも数少ないユニーク性を持つクリプトKOLです。</p>
+      <div class="hero-btns">
+        <a href="https://x.com/aki_playaxie" target="_blank" rel="noopener noreferrer" class="btn-primary">
+          <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          Follow on X
+        </a>
+        <a href="https://www.youtube.com/@nft4142" target="_blank" rel="noopener noreferrer" class="btn-ghost">YouTube ↗</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="photo-frame">
+        <!-- 実写真: images/hero-profile.jpg を同じフォルダの images/ に置くか、パスを変更 -->
+        <img src="images/hero-profile.jpg" alt="Aki" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+        <div class="photo-placeholder" style="display: none;">
+          <div class="icon">📸</div>
+          <div class="txt">Profile Photo</div>
+        </div>
+      </div>
+      <div class="fbadge fb1">
+        <div><div class="num">9,000+</div><div class="lbl">X Followers</div></div>
+      </div>
+      <div class="fbadge fb2">
+        <div><div class="num">3,000+</div><div class="lbl">YouTube</div></div>
+      </div>
+      <div class="fbadge fb3">
+        <div><div class="num">~36/yr</div><div class="lbl">AMA Sessions</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<p style="padding: 2rem; text-align: center; color: var(--gray); font-size: 0.8rem;">※ このファイルは構成修正版です。続きのセクション（Stats, Posts, Highlights…）はプロジェクトの <code>app/[locale]/landing/page.tsx</code> を参照してください。プロフィール写真は <code>images/hero-profile.jpg</code> を同じ階層に <code>images/</code> フォルダで配置するか、<code>src</code> を変更してください。</p>
+
+<script>
+document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 30);
+window.addEventListener('scroll', function(){ document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 30); });
+</script>
+</body>
+</html>

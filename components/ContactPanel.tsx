@@ -1,5 +1,5 @@
 import type { Settings } from '@/lib/microcms';
-import type { Locale } from '@/lib/i18n';
+import { pickByLocale, type Locale } from '@/lib/i18n';
 import { copyPack } from '@/lib/copy-pack';
 import DmTemplateBox from '@/components/DmTemplateBox';
 
@@ -11,24 +11,15 @@ export default function ContactPanel({
   settings: Settings;
 }) {
   const labels = {
-    x: locale === 'jp' ? copyPack.global.cta.x.label.ja : copyPack.global.cta.x.label.en,
-    telegram:
-      locale === 'jp'
-        ? copyPack.global.cta.telegram.label.ja
-        : copyPack.global.cta.telegram.label.en
+    x: pickByLocale(locale, copyPack.global.cta.x.label),
+    telegram: pickByLocale(locale, copyPack.global.cta.telegram.label)
   };
-  const template =
-    locale === 'jp'
-      ? settings.dm_template_ja || copyPack.global.dmTemplate.ja
-      : settings.dm_template_en || copyPack.global.dmTemplate.en;
-  const ctaTitle =
-    locale === 'jp'
-      ? copyPack.servicesPages.mc.cta.title.ja
-      : copyPack.servicesPages.mc.cta.title.en;
-  const ctaText =
-    locale === 'jp'
-      ? copyPack.servicesPages.mc.cta.text.ja
-      : copyPack.servicesPages.mc.cta.text.en;
+  const template = pickByLocale(locale, {
+    ja: settings.dm_template_ja || copyPack.global.dmTemplate.ja,
+    en: settings.dm_template_en || copyPack.global.dmTemplate.en
+  });
+  const ctaTitle = pickByLocale(locale, copyPack.servicesPages.mc.cta.title);
+  const ctaText = pickByLocale(locale, copyPack.servicesPages.mc.cta.text);
 
   return (
     <section className="border-t border-slate-100 bg-slate-50">

@@ -10,14 +10,12 @@ const variantStyles: Record<FieldNoteVariant, string> = {
 };
 
 export default function FieldNote({
-  label = 'FIELD NOTE',
   title,
   body,
   items,
   variant = 'default',
   className
 }: {
-  label?: string;
   title?: string;
   body?: string;
   items?: string[];
@@ -35,16 +33,14 @@ export default function FieldNote({
         className
       )}
     >
-      <div className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-ink-900/70">
-        <span>{label}</span>
-        <span aria-hidden="true" className="text-ink-900/60">
-          📎
-        </span>
-      </div>
-      {title ? <p className="mt-2 text-sm font-semibold">{title}</p> : null}
-      {body ? <p className="mt-2 whitespace-pre-line text-sm">{body}</p> : null}
+      {title ? <p className="text-sm font-semibold">{title}</p> : null}
+      {body ? (
+        <p className={cn('whitespace-pre-line text-sm', title ? 'mt-2' : '')}>
+          {body}
+        </p>
+      ) : null}
       {items?.length ? (
-        <ul className="mt-2 list-disc space-y-1 pl-4 text-sm">
+        <ul className={cn('list-disc space-y-1 pl-4 text-sm', body || title ? 'mt-2' : '')}>
           {items.map((item) => (
             <li key={item}>{item}</li>
           ))}
